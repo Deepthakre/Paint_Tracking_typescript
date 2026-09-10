@@ -102,6 +102,7 @@ function colorStatusColumn(ws: ExcelJS.Worksheet, colLetter: string, startRow = 
 function autoWidth(ws: ExcelJS.Worksheet, minWidth = 10, maxWidth = 42): void {
   ws.columns.forEach((col) => {
     let max = minWidth;
+     if (!col?.eachCell) return;
     col.eachCell({ includeEmpty: true }, (cell) => {
       const len = String(cell.value ?? '').length;
       if (len > max) max = Math.min(len + 2, maxWidth);
